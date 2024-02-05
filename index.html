@@ -1,0 +1,78 @@
+<html>
+<input type="number" placeholder="Input Angka" id="input">
+<br>
+<div style="display: flex; margin-top: .5rem;">
+    <button id="segitiga" style="margin-right: .5rem;">Generate Segitiga</button>
+    <button id="ganjil" style="margin-right: .5rem;">Generate Bilangan Ganjil</button>
+    <button id="prima" style="margin-right: .5rem;">Generate Bilangan Prima</button>
+</div>
+<br>
+<div id="result">
+
+</div>
+
+</html>
+
+<script src="jQuery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var baseUrl = 'http://localhost:3000';
+
+        $('#segitiga').on('click', function () {
+            var triangle = '';
+            var input = $('#input').val();
+
+            request = $.ajax({
+                url: baseUrl + '/segitiga',
+                type: "post",
+                data: JSON.stringify({data: input}),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            request.done(function (response) {
+                $('#result').empty().append(response);
+            });
+        });
+
+        $('#ganjil').on('click', function () {
+            var ganjil = '';
+            var input = $('#input').val();
+
+            request = $.ajax({
+                url: baseUrl + '/ganjil',
+                type: "post",
+                data: JSON.stringify({data: input}),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            request.done(function (response) {
+                $('#result').empty().append(response);
+            });
+        });
+
+        $('#prima').on('click', function () {
+            var prima = '';
+            var input = parseInt($('#input').val());
+
+            request = $.ajax({
+                url: baseUrl + '/prima',
+                type: "post",
+                data: JSON.stringify({data: input}),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+            });
+
+            request.done(function (response) {
+                $('#result').empty().append(response);
+            });
+        });
+    });
+</script>
